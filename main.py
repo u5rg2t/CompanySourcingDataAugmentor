@@ -4,9 +4,16 @@ from datetime import datetime
 import os
 from time import sleep
 import sys
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # Companies House API configuration
-API_KEY = ''  
+API_KEY = os.getenv('COMPANIES_HOUSE_API_KEY')
+if not API_KEY:
+    raise ValueError("COMPANIES_HOUSE_API_KEY not found in environment variables")
+
 BASE_URL = 'https://api.company-information.service.gov.uk'
 
 MAX_REQUESTS = 600 # As per API docs 600 per 5 mins..
@@ -131,6 +138,8 @@ def process_excel():
     # Process each row
     for index, row in df.iterrows():
         company_number = str(row[company_number_column]).strip()
+        # Add leading zeros if company number is less than 8 characters
+        company_number = company_number.zfill(8)
         print(f"Processing company {company_number} ({index + 1}/{len(df)})...")
         
         # Use calculated delay
