@@ -1,4 +1,20 @@
-echo "venv/" > .gitignore
-echo "*.xlsx" >> .gitignore
-echo "__pycache__/" >> .gitignore
-echo "*.pyc" >> .gitignore
+# Python virtual environment
+venv/
+env/
+.env/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE settings
+.vscode/
+.idea/
+
+# Excel files
+*.xlsx
+*.xls
+
+# Sensitive information
+*.env 
